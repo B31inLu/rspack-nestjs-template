@@ -1,0 +1,29 @@
+{
+    "name": "rspack-nestjs-template",
+    "version": "1.0.0",
+    "description": "quick start nestjs template by rspack",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "scripts": {
+        "dev": "rspack serve",
+        "build": "rspack build"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "ts-node": "^10.9.2",
+        "@rspack/cli": "^1.2.5",
+        "@rspack/core": "^1.2.5",
+        "@types/node": "^22.13.4",
+        "run-script-webpack-plugin": "^0.2.1",
+        "webpack-node-externals": "^3.0.0"
+    },
+    "dependencies": {
+        "@nestjs/common": "11.0.10",
+        "@nestjs/core": "11.0.10",
+        "@nestjs/platform-express": "11.0.10",
+        "reflect-metadata": "^0.2.2",
+        "rxjs": "^7.8.1",
+        "typescript": "^5.7.3"
+    }
+}
