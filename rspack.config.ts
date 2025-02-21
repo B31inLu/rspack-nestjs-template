@@ -1,15 +1,14 @@
 import type { Configuration } from "@rspack/cli";
-import { ExternalsPlugin, HotModuleReplacementPlugin, ProgressPlugin } from "@rspack/core";
+import { ExternalsPlugin, ProgressPlugin } from "@rspack/core";
 import nodeExternals from "webpack-node-externals";
 import { RunScriptWebpackPlugin } from "run-script-webpack-plugin";
 const config: Configuration = {
     context: __dirname,
     target: "node",
     entry: {
-        main: ["./src/main.ts"],
+        main: "./src/main.ts",
     },
     externalsType: "commonjs",
-
     module: {
         rules: [
             {
@@ -37,9 +36,11 @@ const config: Configuration = {
     },
     plugins: [
         new ProgressPlugin(),
-        new ExternalsPlugin("commonjs", nodeExternals({
-            allowlist: ["webpack/hot/poll?100"]
-        })),
+        new ExternalsPlugin("commonjs",
+            nodeExternals({
+                allowlist: ["webpack/hot/poll?100"]
+            })
+        ),
         !(process.env.NODE_ENV === 'production') &&
         new RunScriptWebpackPlugin({
             name: "main.js",
