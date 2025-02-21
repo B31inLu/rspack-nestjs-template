@@ -1,5 +1,5 @@
 import type { Configuration } from "@rspack/cli";
-import { ExternalsPlugin, ProgressPlugin } from "@rspack/core";
+import { ExternalsPlugin, HotModuleReplacementPlugin, ProgressPlugin } from "@rspack/core";
 import nodeExternals from "webpack-node-externals";
 import { RunScriptWebpackPlugin } from "run-script-webpack-plugin";
 const config: Configuration = {
@@ -9,9 +9,7 @@ const config: Configuration = {
         main: ["./src/main.ts"],
     },
     externalsType: "commonjs",
-    resolve: {
-        extensions: ["...", ".ts"],
-    },
+
     module: {
         rules: [
             {
@@ -39,15 +37,19 @@ const config: Configuration = {
     },
     plugins: [
         new ProgressPlugin(),
-        new ExternalsPlugin("commonjs", nodeExternals()),
+        new ExternalsPlugin("commonjs", nodeExternals({
+            allowlist: ["webpack/hot/poll?100"]
+        })),
         !(process.env.NODE_ENV === 'production') &&
         new RunScriptWebpackPlugin({
             name: "main.js",
             autoRestart: false,
         }),
     ].filter(Boolean),
+    resolve: {
+        extensions: [".ts", ".tsx", ".js"],
+    },
     devServer: {
-        hot: false,
         devMiddleware: {
             writeToDisk: true,
         },

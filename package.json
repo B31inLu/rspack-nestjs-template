@@ -6,7 +6,7 @@
         "node": ">=18.0.0"
     },
     "scripts": {
-        "dev": "rspack serve",
+        "dev": "rspack dev --watch",
         "build": "rspack build"
     },
     "license": "MIT",
